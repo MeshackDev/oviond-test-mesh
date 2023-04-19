@@ -1,23 +1,25 @@
 import React from 'react';
-import { useFind, useSubscribe } from 'meteor/react-meteor-data';
-import { LinksCollection } from '../api/links';
+import { useTracker } from 'meteor/react-meteor-data';
+import { ClientsCollection } from '../api/ClientsCollection';
+import { Client } from './Client';
 
 export const Info = () => {
-  const isLoading = useSubscribe('links');
-  const links = useFind(() => LinksCollection.find());
-
-  if(isLoading()) {
-    return <div>Loading...</div>;
-  }
+  const clients = useTracker(() => {
+    Meteor.subscribe('clients')
+    return ClientsCollection.find({}).fetch()
+  });
+  console.log(clients)
 
   return (
     <div>
       <h2>Learn Meteor!</h2>
-      <ul>{links.map(
-        link => <li key={link._id}>
-          <a href={link.url} target="_blank">{link.title}</a>
-        </li>
-      )}</ul>
+      <ul>
+        {clients.map(client => (
+          <li key={client._id}>
+            <Client client={client} />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

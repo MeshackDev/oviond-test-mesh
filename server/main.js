@@ -1,37 +1,51 @@
 import { Meteor } from 'meteor/meteor';
-import { LinksCollection } from '/imports/api/links';
+import { ClientsCollection } from '/imports/api/ClientsCollection';
 
-async function insertLink({ title, url }) {
-  await LinksCollection.insertAsync({ title, url, createdAt: new Date() });
-}
+const insertClient = (client) => ClientsCollection.insert({...client, createdAt: new Date()});
 
-Meteor.startup(async () => {
-  // If the Links collection is empty, add some data.
-  if (await LinksCollection.find().countAsync() === 0) {
-    await insertLink({
-      title: 'Do the Tutorial',
-      url: 'https://www.meteor.com/tutorials/react/creating-an-app',
-    });
-
-    await insertLink({
-      title: 'Follow the Guide',
-      url: 'https://guide.meteor.com',
-    });
-
-    await insertLink({
-      title: 'Read the Docs',
-      url: 'https://docs.meteor.com',
-    });
-
-    await insertLink({
-      title: 'Discussions',
-      url: 'https://forums.meteor.com',
-    });
+Meteor.startup(() => {
+  if (ClientsCollection.find().count() === 0) {
+    [
+      {
+        companyName: 'Apple',
+        clientWebsite: 'https://www.apple.com/',
+        clientManager: 'Meshack',
+        selectCurrency: 'United States - USD',
+        clientFolders: null,
+        clientTimezone: 'CET',
+        clientFirstName: '',
+      },
+      {
+        companyName: 'Tesla',
+        clientWebsite: 'https://www.tesla.com/',
+        clientManager: 'Meshack',
+        selectCurrency: 'United States - USD',
+        clientFolders: null,
+        clientTimezone: 'CET',
+        clientFirstName: '',
+      },
+      {
+        companyName: 'Amazon',
+        clientWebsite: 'https://www.amazon.com/',
+        clientManager: 'Meshack',
+        selectCurrency: 'United States - USD',
+        clientFolders: null,
+        clientTimezone: 'CET',
+        clientFirstName: '',
+      },
+      {
+        companyName: 'Walmart',
+        clientWebsite: 'https://www.walmart.com/',
+        clientManager: 'Meshack',
+        selectCurrency: 'United States - USD',
+        clientFolders: null,
+        clientTimezone: 'CET',
+        clientFirstName: '',
+      }
+    ].forEach(insertClient)
   }
 
-  // We publish the entire Links collection to all clients.
-  // In order to be fetched in real-time to the clients
-  Meteor.publish("links", function () {
-    return LinksCollection.find();
+  Meteor.publish("clients", function () {
+    return ClientsCollection.find();
   });
 });
