@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
-import { ClientsCollection } from '../../api/ClientsCollection';
+import { useNavigate } from 'react-router-dom';
+
 
 export const ClientForm = () => {
+  const navigate = useNavigate();
   const [companyName, setCompanyName] = useState("");
   const [clientWebsite, setClientWebsite] = useState("");
   const [clientManager, setClientManager] = useState("");
@@ -9,6 +11,7 @@ export const ClientForm = () => {
   const [clientFolders, setClientFolders] = useState("");
   const [clientTimezone, setClientTimezone] = useState('CET');
   const [clientFirstName, setClientFirstName] = useState("");
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,6 +27,7 @@ export const ClientForm = () => {
     };
 
     Meteor.call('addClient', newClient);
+    navigate("/integrations");
   }
 
   return (
