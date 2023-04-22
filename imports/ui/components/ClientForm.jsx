@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ClientsCollection } from '../api/ClientsCollection';
+import { ClientsCollection } from '../../api/ClientsCollection';
 
 export const ClientForm = () => {
   const [companyName, setCompanyName] = useState("");
