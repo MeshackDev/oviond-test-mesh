@@ -6,9 +6,11 @@ export const AddClient = () => {
   return (
     <>
       <Header>
-        Client header
+        <h1 className='text-lg leading-6 font-medium text-gray-900'>
+          Add New Client
+        </h1>
       </Header>
-      <section>
+      <section className='flex justify-center items-start p-8 bg-slate-100'>
         <ClientForm />
       </section>
     </>
