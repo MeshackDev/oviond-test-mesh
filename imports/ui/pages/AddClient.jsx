@@ -10,7 +10,7 @@ export const AddClient = () => {
           Add New Client
         </h1>
       </Header>
-      <section className='flex justify-center items-start p-8 bg-slate-100'>
+      <section className='flex justify-center items-start h-full p-8 bg-slate-50'>
         <ClientForm />
       </section>
     </>

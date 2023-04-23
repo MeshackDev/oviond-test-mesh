@@ -2,12 +2,17 @@ import React from 'react'
 import { Header } from '../components/Header'
 
 export const Settings = () => {
+
+  const handleDelete = (clientId) => {
+    Meteor.call('removeClient', { clientId });
+  }
+
   return (
     <div>
       <Header>
         Settings header
       </Header>
-      Settings
+      <button onClick={() => handleDelete(client._id)}>Delete Client</button>
     </div>
   )
 }
