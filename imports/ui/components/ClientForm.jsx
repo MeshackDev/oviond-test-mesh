@@ -1,12 +1,22 @@
 import React, { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useTracker } from 'meteor/react-meteor-data';
+import { ClientsCollection } from '../../api/ClientsCollection';
 
 
 export const ClientForm = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const { clientID } = useParams();
 
-  const [companyName, setCompanyName] = useState("");
+  const client = useTracker(() => {
+    Meteor.subscribe('clients')
+    return ClientsCollection.find({_id: clientID}).fetch()[0]
+  });
+
+  console.log(client)
+
+  const [companyName, setCompanyName] = useState(client ? client.companyName : "");
   const [clientWebsite, setClientWebsite] = useState("");
   const [clientManager, setClientManager] = useState("");
   const [selectCurrency, setSelectCurrency] = useState('US');
