@@ -49,3 +49,4 @@ Meteor.startup(() => {
     return ClientsCollection.find();
   });
 });
+
