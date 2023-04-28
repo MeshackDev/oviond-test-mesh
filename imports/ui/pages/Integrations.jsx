@@ -1,8 +1,12 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 
+
 //components
 import { Header } from '../components/Header'
+import { IntegrationsList } from '../components/IntegrationsList';
+
+
 
 
 export const Integrations = () => {
@@ -34,6 +38,7 @@ export const Integrations = () => {
         </div>
       </Header>
       <section className='flex justify-center items-start h-full p-8 bg-slate-50'>
+        <IntegrationsList />
         Intergrations for client ID - {clientID}
       </section>
     </>
