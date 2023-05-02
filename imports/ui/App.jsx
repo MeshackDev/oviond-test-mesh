@@ -11,6 +11,9 @@ import { Integrations } from './pages/Integrations';
 import { Projects } from './pages/Projects';
 import { Settings } from './pages/Settings';
 
+//component
+import { PrivacyPolicy } from './components/PrivacyPolicy';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
@@ -19,6 +22,7 @@ const router = createBrowserRouter(
       <Route path="/:clientID/integrations" element={<Integrations />} />
       <Route path="/:clientID/projects" element={<Projects />} />
       <Route path="/:clientID/client/settings" element={<Settings />} />
+      <Route path="/privacy_policy" element={<PrivacyPolicy />} />
     </Route>
   )
 )

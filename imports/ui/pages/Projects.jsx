@@ -16,7 +16,7 @@ export const Projects = () => {
     <div>
       <Header>
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 w-full">
-        <div className='flex items-center'>
+          <div className='flex items-center'>
             <Link to={"/"} className="flex items-center">
               <img src="/images/favicon.png" className="h-10 w-10" alt="Aveond Logo" />
             </Link>

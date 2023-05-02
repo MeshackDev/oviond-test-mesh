@@ -3,10 +3,9 @@ import { Mongo } from 'meteor/mongo';
 export const ClientsCollection = new Mongo.Collection('clients');
 
 Meteor.methods({
-  removeClient: ({ clientId }) => {
+  removeClient: ({ _id }) => {
     console.log('remove called');
-    ClientsCollection.remove({ _id: clientId });
-    console.log('remove called');
+    ClientsCollection.remove({ _id });
   },
 
   addClient: (client) => {

@@ -19,8 +19,7 @@ export const Settings = () => {
   });
 
   const handleDelete = () => {
-    // Meteor.call('removeClient', { clientID });
-    ClientsCollection.remove({ _id: clientID });
+    Meteor.call('removeClient', { _id: clientID });
     navigate("/");
   }
   
