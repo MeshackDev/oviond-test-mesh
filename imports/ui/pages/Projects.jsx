@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 
 //components
 import { Header } from '../components/Header'
+import { PageFansChart } from '../components/PageFansChart';
 
 
 export const Projects = () => {
@@ -39,7 +40,8 @@ export const Projects = () => {
         </div>
       </Header>
       <section className='flex justify-center items-start h-full p-8 bg-slate-50'>
-        Projects for client ID - {clientID}
+        <PageFansChart />
+        {/* Projects for client ID - {clientID} */}
       </section> 
     </div>
   )

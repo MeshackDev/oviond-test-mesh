@@ -18,7 +18,6 @@ export const PrivacyPolicy = () => {
         <li>Authenticate and log you into the app.</li>
         <li>Provide you with access to the features of our app.</li>
         <li>Enable us to analyze engagement data from your pages to improve our app and your experience.</li>
-        <li>Send you updates and notifications about our app.</li>
       </ul>
       <h2>3. How We Protect Your Information</h2>
       <p>We take the security and privacy of your information seriously and have implemented measures to protect your data. We use industry-standard encryption to protect the transmission of your data and have strict access controls in place to limit who can access your information.</p>

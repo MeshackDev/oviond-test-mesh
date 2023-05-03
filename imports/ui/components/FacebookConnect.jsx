@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { LoginSocialFacebook } from 'reactjs-social-login';
 import { FacebookLoginButton } from "react-social-login-buttons";
+import { Button } from 'flowbite-react';
 
 
 const APP_ID = '1614287289038506'
@@ -8,6 +9,20 @@ const APP_ID = '1614287289038506'
 
 export const FacebookConnect = () => {
   const [connected, setConnected] = useState(false);
+
+  const handleClick = () => {
+    Meteor.call('fetchPageFansLast30Days', { 
+      // userID: response.data.userID,
+      // userShortLivedAccessToken: response.data.accessToken,
+     },
+     (error, result) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(result);
+      }
+    })
+  }
 
   return (
     <div>
@@ -32,6 +47,7 @@ export const FacebookConnect = () => {
       >
         <FacebookLoginButton />
     </LoginSocialFacebook>
+    <Button onClick={handleClick}>Fetch</Button>
     </div>
   )
 }
