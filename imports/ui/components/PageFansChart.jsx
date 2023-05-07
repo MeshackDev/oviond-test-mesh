@@ -1,11 +1,10 @@
 import React from 'react';
-// import { Meteor } from 'meteor/meteor';
 import { useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { ReportsCollection } from '../../api/ReportsCollection';
 
-export const PageFansChart = () => {
+export const PageFansChart = ({ clientID }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [chartOptions, setChartOptions] = useState({});
 
@@ -20,15 +19,20 @@ export const PageFansChart = () => {
 
   useEffect(() => {
     if (!isLoading) {
-      const reports = ReportsCollection.find({}, { sort: { createdAt: 1 } }).fetch();
-      const chartData = reports.map((report) => ({
-        name: report.title,
-        data: report.values.map((value) => [Date.parse(value.end_time), value.value])
-      }));
+      const reports = ReportsCollection.find({ clientID: clientID }, { sort: { createdAt: 1 } }).fetch();
+      console.log('reports in chart',reports[0]);
+
+      const chartData = {
+        name: reports[0].title,
+        data: reports[0].values.map((value) => [Date.parse(value.end_time), value.value])
+      }
 
       setChartOptions({
         title: {
           text: 'Page Fans Data'
+        },
+        credits: {
+          enabled: false,
         },
         xAxis: {
           type: 'datetime',

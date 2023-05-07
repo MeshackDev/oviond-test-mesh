@@ -6,7 +6,6 @@ export const ClientForm = ({ client }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  console.log(client)
 
   const [companyName, setCompanyName] = useState(client ? client.companyName : "");
   const [clientWebsite, setClientWebsite] = useState(client ? client.clientWebsite : "");
@@ -34,6 +33,20 @@ export const ClientForm = ({ client }) => {
     Meteor.call('addClient', newClient);
     navigate("/");
   }
+
+  const handleEdit = () => {
+    const newClient = {
+      companyName,
+      clientWebsite,
+      clientManager,
+      selectCurrency,
+      clientFolders,
+      clientTimezone,
+      clientFirstName,
+    };
+
+    Meteor.call('editClient', { _id: client._id, newClient });
+  };
 
   return (    
   <div className="p-6 flex-1 max-w-3xl sm:p-6 shadow sm:rounded-md bg-white" onSubmit={handleSubmit}>
@@ -85,7 +98,7 @@ export const ClientForm = ({ client }) => {
         {pathname === '/add/client' ? (
           <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Client</button>
         ): (
-          <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
+          <button onClick={handleEdit} type='button' className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
         )}
     </form>
   </div>

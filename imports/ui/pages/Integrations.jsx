@@ -39,7 +39,6 @@ export const Integrations = () => {
       </Header>
       <section className='flex justify-center items-start h-full p-8 bg-slate-50'>
         <IntegrationsList />
-        {/* Intergrations for client ID - {clientID} */}
       </section>
     </>
   )

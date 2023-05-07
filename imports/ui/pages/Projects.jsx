@@ -1,17 +1,48 @@
 import React from 'react'
+import { useTracker } from 'meteor/react-meteor-data';
 import { Link, useParams } from 'react-router-dom'
+import { ClientsCollection } from '../../api/ClientsCollection';
 
 //components
 import { Header } from '../components/Header'
-import { PageFansChart } from '../components/PageFansChart';
+import { ProjectsList } from '../components/ProjectsList';
+
 
 
 export const Projects = () => {
   const { clientID } = useParams();
+  
+  const client = useTracker(() => {
+    Meteor.subscribe('clients')
+    return ClientsCollection.find({ _id: clientID }).fetch()[0]
+  });
+
+  console.log('Client', client)
+  
 
   const handleAdd = () => {
     console.log('project added')
+
+    Meteor.call(
+      'fetchPageFansLast30Days',
+      {
+        userFacebookID: client.userFacebookID,
+        userShortLivedAccessToken: client.userShortLivedAccessToken,
+        clientID,
+      },
+      (error, result) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(result);
+        }
+      },
+    );
   };
+
+  if (!client) {
+    return (<div>Loading...</div>)
+  }
 
   return (
     <div>
@@ -40,8 +71,7 @@ export const Projects = () => {
         </div>
       </Header>
       <section className='flex justify-center items-start h-full p-8 bg-slate-50'>
-        <PageFansChart />
-        {/* Projects for client ID - {clientID} */}
+        <ProjectsList clientID={clientID} />
       </section> 
     </div>
   )
