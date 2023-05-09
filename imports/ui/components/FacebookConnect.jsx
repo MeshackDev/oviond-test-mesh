@@ -57,6 +57,7 @@ export const FacebookConnect = () => {
         <div>
           <LoginSocialFacebook
             appId={APP_ID}
+            scope = 'email,public_profile,pages_read_engagement,pages_show_list'
             onResolve={(response) => {
               if (response.data.accessToken) {
                 Meteor.call(

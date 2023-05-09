@@ -46,6 +46,7 @@ export const ClientForm = ({ client }) => {
     };
 
     Meteor.call('editClient', { _id: client._id, newClient });
+    navigate("/");
   };
 
   return (    
